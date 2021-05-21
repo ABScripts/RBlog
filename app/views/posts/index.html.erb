@@ -1,0 +1,17 @@
+<h1> All posts </h1>
+
+<ul>
+
+<% if @posts.size == 0 %>
+    <h1> No posts yet :( </h1>
+<% else %>
+    <% @posts.each do |post| %>
+        <li><%= link_to post.title, post %></li>
+        <%= link_to "Edit", edit_post_path(post.id) %>
+        |
+        <%= link_to "Delete", delete_post_path(post.id)%>
+        <br><br>
+    <% end %>
+<% end %>
+
+</ul>
