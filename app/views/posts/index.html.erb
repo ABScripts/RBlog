@@ -6,6 +6,11 @@
     <h1> No posts yet :( </h1>
 <% else %>
     <% @posts.each do |post| %>
+        <p>
+            <string> Author: </strong>
+            <%= post.author.email %>
+        </p>
+
         <li><%= link_to post.title, post %></li>
         <%= link_to "Edit", edit_post_path(post.id) %>
         |
