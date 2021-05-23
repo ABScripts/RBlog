@@ -1,20 +1,21 @@
 class PostsController < ApplicationController
     before_action :authenticate_user!, only: %i[new create edit update delete]
     before_action :find_post, only: %i[edit update show delete]
+    before_action :correct_post, only: %i[:edit, :update, :destroy]
 
     def index
-        @posts = Post.all
+        @posts = Post.ordered.with_authors
     end
 
     def show
     end
 
     def new
-        @post = Post.new()
+        @post = current_user.posts.build
     end
 
     def create
-        @post = Post.new(post_params)
+        @post = current_user.posts.build(post_params)
 
         @post.author = current_user
 
@@ -52,5 +53,12 @@ class PostsController < ApplicationController
 
     def find_post
         @post = Post.find(params[:id])
+    end
+
+    def correct_post
+        @owned_post = current_user.posts.find_by(id: params[:id])
+        unless owned_post
+            redirect_to posts_path, notice: "Fails link access!"
+        end
     end
 end

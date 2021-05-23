@@ -6,16 +6,28 @@
     <h1> No posts yet :( </h1>
 <% else %>
     <% @posts.each do |post| %>
+
         <p>
-            <string> Author: </strong>
-            <%= post.author.email %>
+        <string> Author: </strong>
+        <%= post.author.email %>
         </p>
 
+        <p> 
+            <%= post.created_at %>
+        </p>
+
+        <p> 
+            <%= post.body %>
+        </p>
+
+        <% if post.author == current_user %>
         <li><%= link_to post.title, post %></li>
         <%= link_to "Edit", edit_post_path(post.id) %>
         |
         <%= link_to "Delete", delete_post_path(post.id)%>
         <br><br>
+        <% end %>
+
     <% end %>
 <% end %>
 
