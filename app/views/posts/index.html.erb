@@ -1,6 +1,10 @@
 <h1> All posts </h1>
 
-<ul>
+<%= form_with method: :get do |form| %>
+    <%= form.label :query, "Search for:" %>
+    <%= form.text_field :query %>
+    <%= form.submit "Search" %>
+  <% end %>
 
 <% if @posts.size == 0 %>
     <h1> No posts yet :( </h1>
@@ -16,12 +20,13 @@
             <%= post.created_at %>
         </p>
 
+        <%= link_to post.title, post %>
+
         <p> 
             <%= post.body %>
         </p>
 
         <% if post.author == current_user %>
-        <li><%= link_to post.title, post %></li>
         <%= link_to "Edit", edit_post_path(post.id) %>
         |
         <%= link_to "Delete", delete_post_path(post.id)%>
@@ -31,4 +36,13 @@
     <% end %>
 <% end %>
 
-</ul>
+<!-- Pagination -->
+<div class = "pagination-controls">
+    <div class="page-item <% unless @has_newer %> disabled <% end %>" >
+        <a class="page-link" href="/posts/<% if @topic.present? %><%= @topic.alias %><% end %>?newer=<%= @page_token %>">&larr; Newer </a>
+    </div>
+
+    <div class="page-item <% unless @has_older %> disabled <% end %>">
+        <a class="page-link" href="/posts/<% if @topic.present? %><%= @topic.alias %><% end %>?older=<%= @page_token %>"> Older &rarr;</a>
+    </div>
+</div>

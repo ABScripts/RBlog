@@ -1,10 +1,15 @@
+require_relative "../../lib/services/pagination.rb"
+
 class PostsController < ApplicationController
     before_action :authenticate_user!, only: %i[new create edit update delete]
     before_action :find_post, only: %i[edit update show delete]
     before_action :correct_post, only: %i[:edit, :update, :destroy]
 
     def index
-        @posts = Post.ordered.with_authors
+        
+        page_token = params.has_key?(:older) ? params[:older] : params[:newer]
+        
+        paginate(page_token)
     end
 
     def show
@@ -61,4 +66,23 @@ class PostsController < ApplicationController
             redirect_to posts_path, notice: "Fails link access!"
         end
     end
+
+    def paginate(page_token, topic_id = nil)
+        pagination = Services::Pagination.new(page_token, topic_id)
+    
+        if page_token.present?
+          if params.has_key?(:newer)
+            @posts = pagination.newer
+          else 
+            @posts = pagination.older
+          end  
+        else 
+          @posts = pagination.first_page
+        end
+    
+        @has_newer = pagination.has_newer
+        @has_older = pagination.has_older
+    
+        @page_token = pagination.construct_page_token
+      end
 end
