@@ -10,6 +10,10 @@ class PostsController < ApplicationController
         page_token = params.has_key?(:older) ? params[:older] : params[:newer]
         
         paginate(page_token)
+
+        if (query = params[:query])
+            @posts =  @posts.where('title LIKE ?', "#{params[:query].squish}%")
+        end
     end
 
     def show
