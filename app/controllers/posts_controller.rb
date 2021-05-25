@@ -47,6 +47,12 @@ class PostsController < ApplicationController
     end
 
     def delete
+        @comments = @post.comments      # get all comments related to that post
+
+        @comments.each do |comment|     # destroy each comment related to that post
+            comment.destroy
+        end
+
         if @post.destroy
             redirect_to posts_path
         else

@@ -11,5 +11,9 @@ Rails.application.routes.draw do
   
   get '/hello', to: 'home#hello'
 
+  resources :posts do
+    resources :comments
+  end
+
   root to: redirect('/posts')
 end
