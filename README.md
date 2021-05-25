@@ -10,5 +10,5 @@ Tried to implement listed features:
 Materials used:
 All lecture material.
 Getting started page on Ruby site.
-https://devcenter.heroku.com/articles/getting-started-with-rails6 - for deploying on heroku
+https://devcenter.heroku.com/articles/getting-started-with-rails6 - for deployment on heroku
 Some random articles and https://www.youtube.com/watch?v=qCPJMPeG5hw - for pagination feature
