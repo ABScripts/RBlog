@@ -8,7 +8,11 @@ Tried to implement listed features:
 6) Deployment on Heroku - 3
 
 Materials used:
+
 All lecture material.
+
 Getting started page on Ruby site.
+
 https://devcenter.heroku.com/articles/getting-started-with-rails6 - for deployment on heroku
+
 Some random articles and https://www.youtube.com/watch?v=qCPJMPeG5hw - for pagination feature
