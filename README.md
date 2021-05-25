@@ -7,7 +7,8 @@ Tried to implement listed features:
 5) basic search by post`s name - 2
 
 Failed to implement but tried:
-1) Deployment on Heroku
+1) Deployment on Heroku.
+
 The error itself was related to the pq db as well as to the "Precompiling assets failed" error.
 
 Materials used:
